@@ -2,35 +2,41 @@
   <!-- section title -->
   <div class="row mt-3">
     <div class="col-12 text-center">
-      <h1>Aplikacja pogodowa</h1>
+      <h1>Quick country info access</h1>
     </div>
   </div>
+
   <!-- section city name -->
   <div class="row mt-3">
     <div class="col-12">
       <form [formGroup]="weatherSearchForm" (ngSubmit)="checkWeather()">
         <div class="form-group">
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Proszę wprowadzić nazwę miasta..."
-              formControlName="city">
+            <input type="text" class="form-control" placeholder="Country name input" formControlName="city">
             <div class="input-group-append">
-              <button id="check-weather" class="btn btn-primary" type="submit">Sprawdź pogodę</button>
+              <button id="check-weather" class="btn btn-primary" type="submit">Get data</button>
             </div>
           </div>
           <span class="validation-message" *ngIf="weatherSearchForm.get('city')?.hasError('required')">
-            Proszę wprowadzić nazwę miasta...
+            Country name input
           </span>
         </div>
       </form>
     </div>
   </div>
+
+  <!-- section country info -->
   <div class="row mt-3">
     <div class="col-12">
-      <h3 class="text-center mb-4">Bieżące warunki pogodowe</h3>
-      <p class="text-center">Temperatura: ?? °C</p>
-      <p class="text-center">Temperatura odczuwalna: ?? °C</p>
-      <p class="text-center">Wilgotność: ?? %</p>
-      <p class="text-center">Ciśnienie: ?? hPa</p>
+      <h3 class="text-center mb-4">Info for searched country</h3>
+      <p class="text-center">Name: {{ countryData?.name?.common }}</p>
+      <p class="text-center">Area: {{ countryData?.area }} square kilometers</p>
+      <p class="text-center">Capital: {{ countryData?.capital[0] }}</p>
+      <p class="text-center">Region: {{ countryData?.region }}</p>
+      <p class="text-center">Currencies: {{ formatCurrencies(countryData?.currencies) }}</p>
+      <div class="d-flex justify-content-center">
+        <img [src]="countryData?.flags?.png" alt="Flag" class="text-center">
+      </div>
     </div>
   </div>
 </div>

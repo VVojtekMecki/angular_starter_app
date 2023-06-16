@@ -1,4 +1,26 @@
+/* Add custom styles to the container */
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+/* Style the form input and button */
+.input-group input.form-control {
+  border-radius: 0;
+}
+
+.input-group .btn-primary {
+  border-radius: 0;
+}
+
+/* Style the validation message */
 .validation-message {
-  font-size: small;
-  color: #ff0000;
-  }
+  color: red;
+  font-size: 12px;
+}
+
+/* Add additional styles as needed */

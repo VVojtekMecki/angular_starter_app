@@ -4,6 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MainPageComponent } from './main-page/main-page.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {CountriesApiService} from './countries-api.service';
 
 @NgModule({
   declarations: [
@@ -12,9 +14,12 @@ import {ReactiveFormsModule} from '@angular/forms';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    CountriesApiService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
