@@ -6,11 +6,13 @@ import { MainPageComponent } from './main-page/main-page.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {CountriesApiService} from './countries-api.service';
+import { CountriesDataContainerComponent } from './countries-data-container/countries-data-container.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainPageComponent
+    MainPageComponent,
+    CountriesDataContainerComponent
   ],
   imports: [
     BrowserModule,
