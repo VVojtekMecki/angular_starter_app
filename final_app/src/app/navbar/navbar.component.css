@@ -1,0 +1,34 @@
+.navbar-brand {
+  padding-left: 10px;
+}
+
+.navbar-nav {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+/* .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+} */
+
+.user-icon {
+  width: 24px; /* Set the desired width */
+  height: 24px; /* Set the desired height */
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav.ml-auto {
+  margin-left: auto;
+}

@@ -1,20 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-main-page',
   templateUrl: './main-page.component.html',
   styleUrls: ['./main-page.component.css']
 })
-
-export class MainPageComponent implements OnInit {
-  @Input()
-  public countryData: any;
-
-@Output()
-refreshEvent = new EventEmitter();
-
-  constructor(
-  ) { }
+export class MainPageComponent {
+  @Input() countryData: any;
+  @Input() componentTitle: string = 'Title';
+  @Output() refreshEvent = new EventEmitter<void>();
 
   formatCurrencies(currencies: any): string {
     if (!currencies) {
@@ -28,10 +22,7 @@ refreshEvent = new EventEmitter();
     return formattedCurrencies.join(', ');
   }
 
-  ngOnInit(): void {
-  }
-
   onRefresh(): void {
     this.refreshEvent.emit();
-    }
+  }
 }

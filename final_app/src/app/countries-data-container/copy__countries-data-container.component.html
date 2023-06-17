@@ -1,4 +1,3 @@
-<app-navbar (searchHistoryClicked)="handleSearchHistoryClicked()"></app-navbar>
 <div class="container">
   <!-- section title -->
   <div class="row mt-3">
@@ -24,14 +23,21 @@
     </div>
   </div>
 
+
   <div class="row mt-3">
     <div class="col-12 text-center">
       <h3>Search history</h3>
       <div class="row mt-3">
-        <div class="col-6" *ngFor="let search of searchHistory; let i = index">
-          <app-main-page [countryData]="search" [componentTitle]="getComponentTitle(i)"></app-main-page>
+        <div class="col-6">
+          <app-main-page [countryData]="firstCountryData" (refreshEvent)="onRefresh()">
+          </app-main-page>
+        </div>
+        <div class="col-6">
+          <app-main-page [countryData]="secondCountryData" (refreshEvent)="onRefresh()">
+          </app-main-page>
         </div>
       </div>
     </div>
   </div>
+
 </div>

@@ -9,50 +9,49 @@ import { CountriesApiService } from '../countries-api.service'
 })
 export class CountriesDataContainerComponent implements OnInit {
   public weatherSearchForm!: FormGroup;
-  public countryData: any;
-
-  public firstCountryData: any;
-  public secondCountryData: any;
-
-  FIRST_COUNTRY = 'Germany';
-  SECOND_COUNTRY = 'Poland';
-
-
+  public searchHistory: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private countryService: CountriesApiService
-  ) { }
-
-  checkWeather(): void {
-    if (this.weatherSearchForm.valid) {
-      // console.log(this.weatherSearchForm.value);
-      // const cityName = this.weatherSearchForm.value.city;
-      // this.countryService.getCountryData(cityName).subscribe(
-      //   (data) => {
-      //     this.countryData = data[0];
-      //   },
-      //   (error) => {
-      //     console.error('An error occurred:', error);
-      //   }
-      // );
-    }
-    this.countryService
-      .getCountryData(this.FIRST_COUNTRY)
-      .subscribe(
-        (data) => { this.firstCountryData = data[0]; });
-
-    this.countryService
-      .getCountryData(this.SECOND_COUNTRY)
-      .subscribe(
-        (data) => { this.secondCountryData = data[0]; });
-  }
+  ) {}
 
   ngOnInit(): void {
     this.weatherSearchForm = this.formBuilder.group({
       city: ['', Validators.required]
     });
-    this.checkWeather();
+  }
+
+  checkWeather(): void {
+    if (this.weatherSearchForm.valid) {
+      const cityName = this.weatherSearchForm.value.city;
+      this.countryService.getCountryData(cityName).subscribe(
+        (data) => {
+          this.searchHistory.unshift(data[0]);
+          if (this.searchHistory.length > 2) {
+            this.searchHistory.pop();
+          }
+        },
+        (error) => {
+          console.error('An error occurred:', error);
+        }
+      );
+    }
+    this.weatherSearchForm.get('city')?.setValue('');
+  }
+
+  getComponentTitle(index: number): string {
+    if (index === 0) {
+      return 'Your search';
+    } else if (index === 1) {
+      return 'The previous search';
+    } else {
+      return `Search ${index + 1}`;
+    }
+  }
+
+  handleSearchHistoryClicked(): void {
+    // Handle the search history button click event here
   }
 
   onRefresh(): void {

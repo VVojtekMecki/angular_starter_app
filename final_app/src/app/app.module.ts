@@ -7,12 +7,14 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {CountriesApiService} from './countries-api.service';
 import { CountriesDataContainerComponent } from './countries-data-container/countries-data-container.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
-    CountriesDataContainerComponent
+    CountriesDataContainerComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
