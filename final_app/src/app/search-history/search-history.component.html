@@ -1,12 +1,16 @@
-<h3 class="text-center mb-4">Search history</h3>
+<div class="container">
+  <h3 class="text-center mb-4">Search History</h3>
 
-<div *ngIf="searchHistory.length === 0" class="text-center">
-  <p>No search history available.</p>
+  <div class="text-center mt-3">
+    <button class="btn btn-danger mx-2" (click)="clearSearchHistory()">Clear Search History</button>
+    <button class="btn btn-primary mx-2" (click)="goBack()">Go Back</button>
+  </div>
+
+  <div *ngIf="searchHistory.length === 0" class="text-center">
+    <p>No search history available.</p>
+  </div>
+
+  <div *ngFor="let search of searchHistory; let i = index">
+    <app-main-page [countryData]="search" [componentTitle]="getComponentTitle(i)"></app-main-page>
+  </div>
 </div>
-
-<div *ngFor="let search of searchHistory; let i = index">
-  <app-main-page [countryData]="search" [componentTitle]="getComponentTitle(i)"></app-main-page>
-</div>
-
-<button class="btn btn-danger mt-3" (click)="clearSearchHistory()">Clear Search History</button>
-<button class="btn btn-primary" (click)="goBack()">Go Back</button>

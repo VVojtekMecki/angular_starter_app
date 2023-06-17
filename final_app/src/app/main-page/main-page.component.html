@@ -1,12 +1,11 @@
-<h3 class="text-center mb-4">{{ componentTitle }}</h3>
-<p class="text-center">Name: {{ countryData?.name?.common }}</p>
-<p class="text-center">Area: {{ countryData?.area }} square kilometers</p>
-<p class="text-center">Capital: {{ countryData?.capital[0] }}</p>
-<p class="text-center">Region: {{ countryData?.region }}</p>
-<p class="text-center">Currencies: {{ formatCurrencies(countryData?.currencies) }}</p>
-<div class="d-flex justify-content-center">
-  <img [src]="countryData?.flags?.png" alt="Flag" class="text-center">
+<div class="container my-4">
+  <h3 class="text-center mb-4">{{ componentTitle }}</h3>
+  <p class="text-center">Name: {{ countryData?.name?.common }}</p>
+  <p class="text-center">Area: {{ countryData?.area }} square kilometers</p>
+  <p class="text-center">Capital: {{ countryData?.capital[0] }}</p>
+  <p class="text-center">Region: {{ countryData?.region }}</p>
+  <p class="text-center">Currencies: {{ formatCurrencies(countryData?.currencies) }}</p>
+  <div class="d-flex justify-content-center">
+    <img [src]="countryData?.flags?.png" alt="Flag" class="text-center">
+  </div>
 </div>
-<p class="text-center">
-  <button class="btn btn-primary" (click)="onRefresh()">Odśwież</button>
-</p>

@@ -26,4 +26,17 @@ export class LocalStorageService {
   public clear() {
     localStorage.clear();
   }
+
+  public setSearchHistory(searchHistory: any[]) {
+    this.setItem(SEARCH_HISTORY_KEY, JSON.stringify(searchHistory));
+  }
+
+  public getSearchHistory(): any[] {
+    const storedSearchHistory = this.getItem(SEARCH_HISTORY_KEY);
+    return storedSearchHistory ? JSON.parse(storedSearchHistory) : [];
+  }
+
+  public clearSearchHistory() {
+    this.removeItem(SEARCH_HISTORY_KEY);
+  }
 }

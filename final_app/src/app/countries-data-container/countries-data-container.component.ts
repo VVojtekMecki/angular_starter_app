@@ -24,10 +24,7 @@ export class CountriesDataContainerComponent implements OnInit {
     });
 
     // Retrieve searchHistory from LocalStorageService
-    const storedSearchHistory = this.localStorageService.getItem('searchHistory');
-    if (storedSearchHistory) {
-      this.searchHistory = JSON.parse(storedSearchHistory);
-    }
+    this.searchHistory = this.localStorageService.getSearchHistory();
   }
 
   checkWeather(): void {
@@ -36,9 +33,6 @@ export class CountriesDataContainerComponent implements OnInit {
       this.countryService.getCountryData(cityName).subscribe(
         (data) => {
           this.searchHistory.unshift(data[0]);
-          if (this.searchHistory.length > 2) {
-            this.searchHistory.pop();
-          }
           // Update searchHistory in LocalStorageService
           this.localStorageService.setItem('searchHistory', JSON.stringify(this.searchHistory));
         },
@@ -49,6 +43,7 @@ export class CountriesDataContainerComponent implements OnInit {
     }
     this.weatherSearchForm.get('city')?.setValue('');
   }
+
 
   getComponentTitle(index: number): string {
     if (index === 0) {
