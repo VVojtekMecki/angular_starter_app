@@ -8,18 +8,22 @@ import {HttpClientModule} from '@angular/common/http';
 import {CountriesApiService} from './countries-api.service';
 import { CountriesDataContainerComponent } from './countries-data-container/countries-data-container.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SearchHistoryComponent } from './search-history/search-history.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainPageComponent,
     CountriesDataContainerComponent,
-    NavbarComponent
+    NavbarComponent,
+    SearchHistoryComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     CountriesApiService

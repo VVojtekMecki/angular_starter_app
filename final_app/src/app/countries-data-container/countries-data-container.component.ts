@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CountriesApiService } from '../countries-api.service'
+import { CountriesApiService } from '../countries-api.service';
+import { LocalStorageService } from '../local-storage.service';
 
 @Component({
   selector: 'app-countries-data-container',
@@ -13,13 +14,20 @@ export class CountriesDataContainerComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private countryService: CountriesApiService
+    private countryService: CountriesApiService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
     this.weatherSearchForm = this.formBuilder.group({
       city: ['', Validators.required]
     });
+
+    // Retrieve searchHistory from LocalStorageService
+    const storedSearchHistory = this.localStorageService.getItem('searchHistory');
+    if (storedSearchHistory) {
+      this.searchHistory = JSON.parse(storedSearchHistory);
+    }
   }
 
   checkWeather(): void {
@@ -31,6 +39,8 @@ export class CountriesDataContainerComponent implements OnInit {
           if (this.searchHistory.length > 2) {
             this.searchHistory.pop();
           }
+          // Update searchHistory in LocalStorageService
+          this.localStorageService.setItem('searchHistory', JSON.stringify(this.searchHistory));
         },
         (error) => {
           console.error('An error occurred:', error);
