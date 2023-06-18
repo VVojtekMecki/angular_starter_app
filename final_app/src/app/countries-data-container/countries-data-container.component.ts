@@ -9,8 +9,9 @@ import { LocalStorageService } from '../local-storage.service';
   styleUrls: ['./countries-data-container.component.css']
 })
 export class CountriesDataContainerComponent implements OnInit {
-  public weatherSearchForm!: FormGroup;
+  public countrySearchForm!: FormGroup;
   public searchHistory: any[] = [];
+  public showPopup: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,7 +20,7 @@ export class CountriesDataContainerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.weatherSearchForm = this.formBuilder.group({
+    this.countrySearchForm = this.formBuilder.group({
       city: ['', Validators.required]
     });
 
@@ -27,9 +28,9 @@ export class CountriesDataContainerComponent implements OnInit {
     this.searchHistory = this.localStorageService.getSearchHistory();
   }
 
-  checkWeather(): void {
-    if (this.weatherSearchForm.valid) {
-      const cityName = this.weatherSearchForm.value.city;
+  addSearchHistory(): void {
+    if (this.countrySearchForm.valid) {
+      const cityName = this.countrySearchForm.value.city;
       this.countryService.getCountryData(cityName).subscribe(
         (data) => {
           this.searchHistory.unshift(data[0]);
@@ -38,10 +39,13 @@ export class CountriesDataContainerComponent implements OnInit {
         },
         (error) => {
           console.error('An error occurred:', error);
+          if (error.status === 404) {
+            this.showPopup = true; // Show the popup when a 404 error occurs
+          }
         }
       );
     }
-    this.weatherSearchForm.get('city')?.setValue('');
+    this.countrySearchForm.get('city')?.setValue('');
   }
 
 
@@ -51,7 +55,7 @@ export class CountriesDataContainerComponent implements OnInit {
     } else if (index === 1) {
       return 'The previous search';
     } else {
-      return `Search ${index + 1}`;
+      return `${index + 1}. search`;
     }
   }
 
@@ -60,6 +64,10 @@ export class CountriesDataContainerComponent implements OnInit {
   }
 
   onRefresh(): void {
-    this.checkWeather();
+    this.addSearchHistory();
+  }
+
+  closePopup() {
+    this.showPopup = false; // Hide the popup when the close button is clicked
   }
 }

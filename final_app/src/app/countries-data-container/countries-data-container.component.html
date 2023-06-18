@@ -10,7 +10,7 @@
 
   <div class="row mt-3">
     <div class="col-12">
-      <form [formGroup]="weatherSearchForm" (ngSubmit)="checkWeather()">
+      <form [formGroup]="countrySearchForm" (ngSubmit)="addSearchHistory()">
         <div class="form-group">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Country name input" formControlName="city">
@@ -18,7 +18,7 @@
               <button id="check-weather" class="btn btn-primary" type="submit">Get data</button>
             </div>
           </div>
-          <span class="validation-message" *ngIf="weatherSearchForm.get('city')?.hasError('required')">
+          <span class="validation-message" *ngIf="countrySearchForm.get('city')?.hasError('required')">
           </span>
         </div>
       </form>
@@ -40,3 +40,5 @@
     <button class="btn btn-primary" routerLink="/search-history">See all your entries</button>
   </p>
 </div>
+
+<app-error-popup *ngIf="showPopup" (close)="closePopup()"></app-error-popup>

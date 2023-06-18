@@ -38,7 +38,7 @@ export class SearchHistoryComponent {
     } else if (index === 1) {
       return 'The previous search';
     } else {
-      return `Search ${index + 1}`;
+      return `${index + 1}. search`;
     }
   }
 }
